@@ -6,14 +6,23 @@ import java.util.Scanner;
 import com.leave_management_interfaces.einf.EmployeeInterfaces;
 
 public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
+	
 	Scanner scanner = new Scanner(System.in);
-	RegEmployeData r = new RegEmployeData(); // creating object of RegEmployeData class
-	// assigning arraylidt return type from employeeReturn() to an Arrylist of
+	
+	// creating object of RegEmployeData class
+	
+	RegEmployeData r = new RegEmployeData(); 
+	
+	// assigning arraylist return type from employeeReturn() to an Arrylist of
 	// Leavemanagementportal data type
+	
 	ArrayList<LeaveManagementPortal> al2=r.employeData(null);
 
+	//overriding employee method of EmployeeInterfaces interface
+	
 	@Override
 	public void employee(ArrayList<LeaveManagementPortal> ar2) {
+		
 		ArrayList<LeaveManagementPortal> ar=ar2;
 		System.out.println("**************** Welcom To Leave Management portal Employee blog Page *****************");
 		System.out.println();
@@ -22,24 +31,41 @@ public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
 		System.out.println("2.Show Leave");
 		System.out.println("3.Show Employee");
 		System.out.println("***************************************************************************************");
+		
 		// using scanner to collect option
+		
 		int opt = scanner.nextInt();
-		try // exceptional handling
+		
+		// exceptional handling
+		
+		try 
 		{
 			// passing opt to switch case
+			
 			switch (opt) {
+			
 			case 1:
+				//calling takeLeaves method
+				
 				takeLeaves(ar);
+				
 				System.out.println("***************************************************************************************");
+				
 				break;
 			case 2:
-
+				
+				//calling showLeave method
+				
 				showLeaves(ar);
+				
 				System.out.println("***************************************************************************************");
+				
 				break;
 			case 3:
-
+				//calling showEmployee method
+				
 				showEmployees(al2);
+				
 				System.out.println("***************************************************************************************");
 
 				break;
@@ -55,7 +81,11 @@ public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
 		}
 
 		finally {
+			
 			System.out.println("***************************************************************************************");
+			
+			//calling doYouWantToContinue method
+			
 			doYouWantToContinue(ar2);
 			
 
@@ -63,23 +93,38 @@ public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
 
 	}
 
+	
+	//overriding takeLeaves method of EmployeeInterfaces interface
+	
 	@Override
 	public void takeLeaves(ArrayList<LeaveManagementPortal> al) {
-
-		try { // exception handling
+		
+		// exception handling
+		
+		try { 
 			System.out.println("Enter Id");
+			
 			int ide = scanner.nextInt();
+			
 			System.out.println("Enter Number of Leaves You Want");
+			
 			int lev = scanner.nextInt();
+			
 			// using for loop to iterate among arraylist to search id
+			
 			for (LeaveManagementPortal lmp : al) {
+				
 				if (ide == lmp.getId() && lmp.getLeaves() != 0 && lmp.getLeaves() >= lev) {
 
 					lmp.setLeaves(lmp.getLeaves() - lev);
+					
 					System.out.println("Total Leaves Avilable : " + lmp.getLeaves());
+					
 					break;
 				} else {
+					
 					System.out.println("Enter a valid Id : ");
+					
 				}
 			}
 
@@ -92,24 +137,33 @@ public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
 		finally
 
 		{
-
+			//calling doYouWantToContinue method
+			
 			doYouWantToContinue(al);
+			
 		}
 
 	}
 
+	//overriding showLeaves method of EmployeeInterfaces interface
+	
 	@Override
 	public void showLeaves(ArrayList<LeaveManagementPortal> ar2) {
 
 		try {
 
 			System.out.println("Enter Id");
+			
 			int ide = scanner.nextInt();
+			
 			// using for loop to iterate among arraylist al to search id
+			
 			for (LeaveManagementPortal lmp : ar2) {
+				
 				if (ide == lmp.getId()) {
 
 					System.out.println("Total leaves avilable"+lmp.getLeaves());
+					
 					break;
 				} 
 			}
@@ -119,32 +173,43 @@ public class EmployeBlog extends RegEmployeData implements EmployeeInterfaces {
 		}
 
 		finally {
+			
 			//calling doYouWantToContinue() method present at bottom of this file
+			
 			doYouWantToContinue(ar2);
+			
 		}
 
 	}
 
+	//overriding showEmployees method of EmployeeInterfaces interface
+	
 	@Override
 	public void showEmployees(ArrayList<LeaveManagementPortal> al) {
 
 		try {
 			System.out.println("Enter Id");
+			
 			//creating local variable ide
+			
 			int ide = scanner.nextInt();
+			
 			// using for loop to iterate among arraylist al to show details of employe matches with given id
+			
 			for (LeaveManagementPortal lmp : al) {
+				
 				if (ide == lmp.getId()) {
 
 					System.out.println(lmp);
+					
 					break;
 				} 
 			}
 		} catch (Exception e)
 
-		{
-			System.out.println(e);
-		}
+			{
+				System.out.println(e);
+			}
 
 		finally {
 			doYouWantToContinue(al);
